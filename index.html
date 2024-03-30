@@ -70,6 +70,47 @@
       height: 30px;
       margin-right: 10px;
     }
+            .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .option {
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .points {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .selected {
+            background-color: #e0f0ff; /* light blue color */
+        }
+    
     .footer {
     background-color: #ffd700;
     color: black;
@@ -168,6 +209,127 @@ document.querySelectorAll('.shareBox a').forEach(function(link) {
   link.setAttribute('href', socialMediaURL + encodeURIComponent(url));
 });
 </script>
+      <div class="quiz-container">
+        <button class="btn start-btn" onclick="startQuiz()">Start</button>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <button class="btn prev-btn" onclick="prevQuestion()" style="display: none;">Previous</button>
+        <button class="btn next-btn" onclick="nextQuestion()" style="display: none;">Next</button>
+        <button class="btn submit-btn" onclick="submitQuiz()" style="display: none;">Submit</button>
+        <div class="points" id="points" style="display: none;"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Paris", "London", "Berlin", "Madrid"],
+                correctAnswer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Venus", "Jupiter"],
+                correctAnswer: "Mars"
+            },
+            // Add more questions here...
+        ];
+
+        let currentQuestionIndex = 0;
+        let userPoints = 0;
+        let userAnswers = [];
+
+        function startQuiz() {
+            const startButton = document.querySelector(".start-btn");
+            startButton.style.display = "none";
+
+            const prevButton = document.querySelector(".prev-btn");
+            const nextButton = document.querySelector(".next-btn");
+            const submitButton = document.querySelector(".submit-btn");
+            prevButton.style.display = "inline-block";
+            nextButton.style.display = "inline-block";
+            submitButton.style.display = "inline-block";
+
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const currentQuestion = questions[currentQuestionIndex];
+
+            questionElement.textContent = currentQuestion.question;
+            optionsElement.innerHTML = "";
+
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("option");
+                optionElement.textContent = option;
+                optionElement.onclick = () => checkAnswer(index, optionElement);
+                optionsElement.appendChild(optionElement);
+            });
+
+            userAnswers[currentQuestionIndex] !== undefined && optionsElement.children[userAnswers[currentQuestionIndex]].classList.add("selected");
+        }
+
+        function checkAnswer(selectedIndex, optionElement) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (currentQuestion.options[selectedIndex] === currentQuestion.correctAnswer) {
+                if (!optionElement.classList.contains("selected")) {
+                    userPoints++;
+                }
+            }
+            optionElement.classList.toggle("selected");
+            userAnswers[currentQuestionIndex] = selectedIndex;
+            disableOptions();
+            nextQuestion();
+        }
+
+        function disableOptions() {
+            const optionElements = document.querySelectorAll(".option");
+            optionElements.forEach(option => {
+                option.onclick = null;
+                option.style.pointerEvents = "none";
+            });
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else if (currentQuestionIndex === questions.length - 1) {
+                
+            }
+        }
+
+        function submitQuiz() {
+            showPoints();
+            disableOptions();
+            hideButtons();
+        }
+
+        function hideButtons() {
+            const prevButton = document.querySelector(".prev-btn");
+            const nextButton = document.querySelector(".next-btn");
+            const submitButton = document.querySelector(".submit-btn");
+            prevButton.style.display = "none";
+            nextButton.style.display = "none";
+            submitButton.style.display = "none";
+        }
+
+        function showPoints() {
+            const totalQuestions = questions.length;
+            const pointsElement = document.getElementById("points");
+            pointsElement.textContent = `Your score: ${userPoints} / ${totalQuestions}`;
+            pointsElement.style.display = "block";
+        }
+    </script>
 <div class="footer">
   <p>Copyright &copy; Harsh Official</p>
 </div>
