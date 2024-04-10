@@ -168,7 +168,7 @@
 </div>
 
 <div class="share-button">
-  <button class="shareBtn">Share</button>
+  <button class="shareBtn">Share</button><button style="bottom: 18% ! important; right: 2%;" class="shareBtn" onclick="printPage()">Print</button>
  <div class="shareBox" id="shareBox">
   <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook"></a>
   <a href="https://twitter.com/intent/tweet?url=" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/23/23931.png" alt="Twitter"></a>
@@ -322,6 +322,11 @@ document.querySelectorAll('.shareBox a').forEach(function(link) {
             const pointsElement = document.getElementById("points");
             pointsElement.textContent = `Your score: ${userPoints} / ${totalQuestions}`;
             pointsElement.style.display = "block";
+        }
+    </script><script>
+        // JavaScript to print the current page
+        function printPage() {
+            window.print();
         }
     </script><br><br>
 <div class="footer">
