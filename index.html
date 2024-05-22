@@ -26,7 +26,16 @@
       background-color: white !important;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
-        
+        .navbar-brand .color-bars::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, blue 25%, red 25%, red 50%, yellow 50%, yellow 75%, green 75%);
+      border-radius: 20px;
+        } 
     }
     .share-button {
       text-align: center;
@@ -139,7 +148,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a style="text-align: left; color: black !important;" class="navbar-brand" href="https://harshna044.github.io/harshofficial/"><b>Harsh Official</b></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <img src="https://via.placeholder.com/24" alt="Logo"> <!-- Replace with your image URL -->
+    <span class="color-bars">Harsh Official</span><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
