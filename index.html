@@ -1,8 +1,10 @@
+/body>
+  </html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harsh Official</title>
+  <title>Harsh Official</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
@@ -19,11 +21,10 @@
    
     .navbar {
       background-color: rgba(255,255,255,0.95) !important;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     .navbar-toggler {
       background-color: white !important;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
         
     }
@@ -40,7 +41,7 @@
     z-index: 9999;
     background-color: #ffd700;
     color: black;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border: 0px;
     border-radius: 8px;
     padding: 5px 10px;
@@ -79,7 +80,89 @@
             padding: 20px;
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    #toc {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-right: 1px solid #ccc;
+            height: 100%;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            z-index: 10000;
+        }
+
+        #toc ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #toc li {
+            margin: 10px 0;
+        }
+
+        #toc a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        #toc a:hover {
+            text-decoration: underline;
+        }
+
+        .toc-level-2 {
+            padding-left: 5px;
+        }
+
+        .toc-level-3 {
+            padding-left: 10px;
+        }
+
+        .toc-level-4 {
+            padding-left: 15px;
+        }
+
+        .toc-level-5 {
+            padding-left: 20px;
+        }
+
+        .toc-level-6 {
+            padding-left: 25px;
+        }
+
+        #toc-button {
+            position: fixed;
+            top: 15%;
+            right: 0;
+            padding: 10px 19px;
+            background-color: #2799ff;
+            color: white;
+            border: none;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #toc-button .blinking-dot {
+            width: 8px;
+            height: 8px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
         .question {
             font-size: 18px;
@@ -129,7 +212,7 @@
       width: 100%;
       height: 5px;
       background: linear-gradient(90deg, #4285f4 25%, #ea4335 25%, #ea4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       border-radius: 20px;
     }
     .footer {
@@ -157,7 +240,7 @@
   </style>
 </head>
 <body>
-
+<button id="toc-button"><i class="fas fa-list-ul"></i><div class="blinking-dot"></div></button>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <img width="25px" src="Harsh_Class_10_CBSE_logo-min-removebg-preview.png" alt="Harsh Official Logo">
     <a class="navbar-brand" href="https://harshna044.github.io/harshofficial/"><b>Harsh Official</b></a>
@@ -183,12 +266,13 @@
 </nav>
 
 <div class="container">
-   <br><br><br>
+   <br><br><br> <nav id="toc"></nav><main>
   <h1 style="text-align: left;">Welcome to my official website!</h1>
 <br>
 <p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p> 
 <p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p> 
 <p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p> 
+<h2>Thank You </h2>
 </div>
 
 <div class="share-button">
@@ -236,7 +320,7 @@ document.querySelectorAll('.shareBox a').forEach(function(link) {
         <button class="btn submit-btn" onclick="submitQuiz()" style="display: none;">Submit</button>
         <div class="points" id="points" style="display: none;"></div>
     </div>
-
+</main>
     <script>
         const questions = [
             {
@@ -352,7 +436,52 @@ document.querySelectorAll('.shareBox a').forEach(function(link) {
         function printPage() {
             window.print();
         }
-    </script><br><br>
+    </script>
+  <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toc = document.getElementById('toc');
+            const tocButton = document.getElementById('toc-button');
+            const headings = document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main h6');
+            const tocList = document.createElement('ul');
+            const headingCounters = [0, 0, 0, 0, 0, 0]; // Array to keep track of the numbering
+
+            headings.forEach(heading => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                const id = heading.textContent.toLowerCase().replace(/\s+/g, '-');
+                const level = parseInt(heading.tagName.charAt(1), 10);  // Get the heading level (1-6)
+                
+                // Reset lower level counters
+                for (let i = level; i < headingCounters.length; i++) {
+                    headingCounters[i] = 0;
+                }
+                
+                // Increment current level counter
+                headingCounters[level - 1]++;
+                
+                // Generate the numbering string
+                const numbering = headingCounters.slice(0, level).join('.') + ' ';
+                
+                heading.id = id;
+                link.href = `#${id}`;
+                link.textContent = numbering + heading.textContent;
+
+                listItem.classList.add(`toc-level-${level}`);
+                listItem.appendChild(link);
+                tocList.appendChild(listItem);
+            });
+
+            toc.appendChild(tocList);
+
+            tocButton.addEventListener('click', () => {
+                if (toc.style.left === '0px') {
+                    toc.style.left = '-250px';
+                } else {
+                    toc.style.left = '0px';
+                }
+            });
+        });
+                             </script><br><br>
 <div class="footer">
   <p>Copyright &copy; Harsh Official</p>
 </div>
