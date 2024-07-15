@@ -25,7 +25,38 @@
     .navbar-toggler {
       background-color: white !important;
     }
-        
+    .gradient-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1em;
+            padding: 20px;
+            background: linear-gradient(160deg, #800080, #DA70D6, #FF69B4, #FFD700);
+            overflow: hidden;
+        }
+        .gradient-text::before, .gradient-text::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            animation: move 5s infinite linear;
+        }
+        .gradient-text::before {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 20%;
+        }
+        .gradient-text::after {
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            left: 70%;
+        }
+
+        @keyframes move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }   
     }
     .share-button {
       text-align: center;
@@ -266,18 +297,16 @@
       </li>
     </ul>
   </div>
-</nav>
-
+</nav><br><br><br>
+<div class="gradient-text">
 <div class="container">
-   <br><br><br> <nav id="toc"><b><p>Table of Content</p><hr></b></nav><main>
+    
+  <nav id="toc"><b><p>Table of Content</p><hr></b></nav><main>
   <h1 style="text-align: left;">Welcome to my official website!</h1>
 <br>
-<p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p> 
-<p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p> 
-<p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p> 
-<h2>Thank You </h2>
+<p>This website is created by Harsh. Share this website with your friends by clicking on Share button. For more updates Stay tuned !</p>
 </div>
-
+</div>
 <div class="share-button">
   <button class="shareBtn">Share</button><button style="bottom: 18% ! important; right: 2%;" class="shareBtn" onclick="printPage()">Print</button>
  <div class="shareBox" id="shareBox">
